@@ -1,23 +1,23 @@
-import { Space_Grotesk, Inter, IBM_Plex_Mono } from 'next/font/google';
+import { Montserrat, Plus_Jakarta_Sans, JetBrains_Mono } from 'next/font/google';
 import './globals.css';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 
-const spaceGrotesk = Space_Grotesk({
+const montserrat = Montserrat({
   subsets: ['latin'],
   weight: ['500', '600', '700'],
   variable: '--font-display',
   display: 'swap',
 });
 
-const inter = Inter({
+const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ['latin'],
   weight: ['400', '500', '600'],
   variable: '--font-body',
   display: 'swap',
 });
 
-const ibmPlexMono = IBM_Plex_Mono({
+const jetBrainsMono = JetBrains_Mono({
   subsets: ['latin'],
   weight: ['400', '500'],
   variable: '--font-mono',
@@ -48,7 +48,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`${spaceGrotesk.variable} ${inter.variable} ${ibmPlexMono.variable}`}>
+    <html lang="en" className={`${montserrat.variable} ${plusJakartaSans.variable} ${jetBrainsMono.variable}`}>
       <body>
         <Header />
         <main>{children}</main>
