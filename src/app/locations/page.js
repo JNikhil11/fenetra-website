@@ -1,4 +1,5 @@
 'use client';
+import { MapPin } from 'lucide-react';
 
 
 export default function LocationsPage() {
@@ -24,16 +25,16 @@ export default function LocationsPage() {
               </div>
             </div>
             <div className="branch-map" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'var(--coolgrey)', borderRadius: '12px', minHeight: '300px' }}>
-              <a href="https://maps.app.goo.gl/ut2J4rckmFNXMJ9b6" target="_blank" rel="noopener noreferrer" className="btn btn--primary" style={{ padding: '1rem 2rem', fontSize: '1.1rem' }}>
-                📍 View HQ on Google Maps
+              <a href="https://maps.app.goo.gl/ut2J4rckmFNXMJ9b6" target="_blank" rel="noopener noreferrer" className="btn btn--primary" style={{ padding: '1rem 2rem', fontSize: '1.1rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <MapPin size={20} /> View HQ on Google Maps
               </a>
             </div>
           </div>
 
           <div className="branch-card">
             <div className="branch-map mobile-order-2" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'var(--coolgrey)', borderRadius: '12px', minHeight: '300px' }}>
-              <a href="https://maps.app.goo.gl/hBPH14qsYuFbr5ot9" target="_blank" rel="noopener noreferrer" className="btn btn--primary" style={{ padding: '1rem 2rem', fontSize: '1.1rem' }}>
-                📍 View Branch 2 on Google Maps
+              <a href="https://maps.app.goo.gl/hBPH14qsYuFbr5ot9" target="_blank" rel="noopener noreferrer" className="btn btn--primary" style={{ padding: '1rem 2rem', fontSize: '1.1rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <MapPin size={20} /> View Branch 2 on Google Maps
               </a>
             </div>
             <div className="branch-info mobile-order-1">

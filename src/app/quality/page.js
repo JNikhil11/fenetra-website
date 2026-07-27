@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import { Award, BadgeCheck, BarChart3, Sparkles, Palette, Factory, Thermometer, Clock, Truck } from 'lucide-react';
 
 export const metadata = {
   title: 'Quality & Certifications | Fenetra Industries',
@@ -18,13 +19,13 @@ export default function QualityPage() {
         <div className="container">
           <div className="cert-cards">
             <div className="cert-card">
-              <div className="cert-icon">🏆</div>
-              <h2>ISO 9001:2015</h2>
+              <div className="cert-icon" style={{ display: 'flex', justifyContent: 'center', marginBottom: '1rem', color: 'var(--amber)' }}><Award size={48} strokeWidth={1.5} /></div>
+              <h2 style={{ fontWeight: '600', marginBottom: '1rem' }}>ISO 9001:2015</h2>
               <p>Certified Quality Management System ensuring consistent product quality and continuous improvement.</p>
             </div>
             <div className="cert-card">
-              <div className="cert-icon">✅</div>
-              <h2>Industry Standards</h2>
+              <div className="cert-icon" style={{ display: 'flex', justifyContent: 'center', marginBottom: '1rem', color: 'var(--amber)' }}><BadgeCheck size={48} strokeWidth={1.5} /></div>
+              <h2 style={{ fontWeight: '600', marginBottom: '1rem' }}>Industry Standards</h2>
               <p>All our products comply with leading industry standards for safety, durability, and performance.</p>
             </div>
           </div>
@@ -36,18 +37,18 @@ export default function QualityPage() {
           <h2 className="section-title">Our Quality Commitments</h2>
           <div className="commitment-cards">
             <div className="commitment-card">
-              <div className="icon">📊</div>
-              <h3>Consistent MFI</h3>
+              <div className="icon" style={{ display: 'flex', marginBottom: '1.25rem', color: 'var(--cobalt)' }}><BarChart3 size={40} strokeWidth={1.5} /></div>
+              <h3 style={{ fontWeight: '600' }}>Consistent MFI</h3>
               <p>We rigorously test Melt Flow Index (MFI) to ensure uniform processing characteristics across all batches.</p>
             </div>
             <div className="commitment-card">
-              <div className="icon">✨</div>
-              <h3>High Purity</h3>
+              <div className="icon" style={{ display: 'flex', marginBottom: '1.25rem', color: 'var(--cobalt)' }}><Sparkles size={40} strokeWidth={1.5} /></div>
+              <h3 style={{ fontWeight: '600' }}>High Purity</h3>
               <p>Zero contamination guarantee. We maintain strict material handling protocols to prevent cross-contamination.</p>
             </div>
             <div className="commitment-card">
-              <div className="icon">🎨</div>
-              <h3>Custom Colour Matching</h3>
+              <div className="icon" style={{ display: 'flex', marginBottom: '1.25rem', color: 'var(--cobalt)' }}><Palette size={40} strokeWidth={1.5} /></div>
+              <h3 style={{ fontWeight: '600' }}>Custom Colour Matching</h3>
               <p>Precision color matching services using advanced spectrophotometers for exact brand requirements.</p>
             </div>
           </div>
@@ -75,8 +76,8 @@ export default function QualityPage() {
                 </li>
               </ul>
             </div>
-            <div className="lab-image">
-              <div className="image-placeholder">Lab Equipment Image</div>
+            <div className="lab-image" style={{ borderRadius: '12px', overflow: 'hidden', display: 'flex' }}>
+              <Image src="/images/quality/lab-equipment.jpg" alt="Fenetra Quality Control Laboratory" width={600} height={400} style={{ width: '100%', height: 'auto', objectFit: 'cover' }} />
             </div>
           </div>
         </div>
@@ -87,23 +88,23 @@ export default function QualityPage() {
           <h2 className="section-title">Supply Chain Strengths</h2>
           <div className="strengths-grid">
             <div className="strength-item">
-              <div className="icon">🏭</div>
-              <h3>Bulk Sourcing</h3>
+              <div className="icon" style={{ display: 'flex', marginBottom: '1.25rem', color: 'var(--amber)' }}><Factory size={40} strokeWidth={1.5} /></div>
+              <h3 style={{ fontWeight: '600' }}>Bulk Sourcing</h3>
               <p>Direct sourcing from major manufacturers ensures competitive pricing and reliable supply.</p>
             </div>
             <div className="strength-item">
-              <div className="icon">🌡️</div>
-              <h3>Climate-Controlled</h3>
+              <div className="icon" style={{ display: 'flex', marginBottom: '1.25rem', color: 'var(--amber)' }}><Thermometer size={40} strokeWidth={1.5} /></div>
+              <h3 style={{ fontWeight: '600' }}>Climate-Controlled</h3>
               <p>Proper warehousing conditions to maintain material integrity and prevent moisture absorption.</p>
             </div>
             <div className="strength-item">
-              <div className="icon">⏱️</div>
-              <h3>On-Time Delivery</h3>
+              <div className="icon" style={{ display: 'flex', marginBottom: '1.25rem', color: 'var(--amber)' }}><Clock size={40} strokeWidth={1.5} /></div>
+              <h3 style={{ fontWeight: '600' }}>On-Time Delivery</h3>
               <p>Reliable logistics ensuring continuous production for our manufacturing clients.</p>
             </div>
             <div className="strength-item">
-              <div className="icon">🚚</div>
-              <h3>Own Transport Fleet</h3>
+              <div className="icon" style={{ display: 'flex', marginBottom: '1.25rem', color: 'var(--amber)' }}><Truck size={40} strokeWidth={1.5} /></div>
+              <h3 style={{ fontWeight: '600' }}>Own Transport Fleet</h3>
               <p>Dedicated transportation infrastructure for flexible and rapid delivery capabilities.</p>
             </div>
           </div>

@@ -1,6 +1,8 @@
 'use client';
 
 import { useState } from 'react';
+import Link from 'next/link';
+import { Phone, Mail, Clock, MapPin } from 'lucide-react';
 
 export default function ContactPage() {
   const [quoteForm, setQuoteForm] = useState({
@@ -107,21 +109,21 @@ export default function ContactPage() {
               <div className="info-card">
                 <h3>Contact Information</h3>
                 <div className="info-item">
-                  <span className="icon">📞</span>
+                  <span className="icon" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--cobalt)' }}><Phone size={24} strokeWidth={1.5} /></span>
                   <div>
                     <strong>Phone</strong>
                     <a href="tel:+919566326131">+91 9566326131</a>
                   </div>
                 </div>
                 <div className="info-item">
-                  <span className="icon">✉️</span>
+                  <span className="icon" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--cobalt)' }}><Mail size={24} strokeWidth={1.5} /></span>
                   <div>
                     <strong>Email</strong>
                     <a href="mailto:info@fenetra.in">info@fenetra.in</a>
                   </div>
                 </div>
                 <div className="info-item">
-                  <span className="icon">🕒</span>
+                  <span className="icon" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--cobalt)' }}><Clock size={24} strokeWidth={1.5} /></span>
                   <div>
                     <strong>Business Hours</strong>
                     <span>Monday - Saturday<br/>9:00 AM - 6:00 PM</span>
@@ -139,7 +141,7 @@ export default function ContactPage() {
                   <strong>Branch 2</strong>
                   <p>Plot No. 10, Thiru Nagar, Mannur–Aranvoyal Road, Mannur Village, Sriperumbudur – 602105</p>
                 </div>
-                <a href="/locations" className="text-link">View Maps &rarr;</a>
+                <Link href="/locations" className="text-link">View Maps &rarr;</Link>
               </div>
 
               <div className="brochure-card">
@@ -190,17 +192,21 @@ export default function ContactPage() {
 
       <section className="maps-section bg-grey">
         <div className="maps-grid">
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', background: 'var(--coolgrey)', borderRadius: '12px', minHeight: '300px', padding: '2rem', textAlign: 'center' }}>
+          <div className="map-container">
             <h3 style={{ marginBottom: '1rem', color: 'var(--navy)' }}>Headquarters (Branch 1)</h3>
-            <a href="https://maps.app.goo.gl/ut2J4rckmFNXMJ9b6" target="_blank" rel="noopener noreferrer" className="btn btn--primary" style={{ padding: '1rem 2rem', fontSize: '1.1rem' }}>
-              📍 View HQ on Google Maps
-            </a>
+            <div className="map-btn-container">
+              <a href="https://maps.app.goo.gl/ut2J4rckmFNXMJ9b6" target="_blank" rel="noopener noreferrer" className="btn btn-primary" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}>
+                <MapPin size={20} /> View HQ on Google Maps
+              </a>
+            </div>
           </div>
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', background: 'var(--coolgrey)', borderRadius: '12px', minHeight: '300px', padding: '2rem', textAlign: 'center' }}>
+          <div className="map-container">
             <h3 style={{ marginBottom: '1rem', color: 'var(--navy)' }}>Warehouse (Branch 2)</h3>
-            <a href="https://maps.app.goo.gl/hBPH14qsYuFbr5ot9" target="_blank" rel="noopener noreferrer" className="btn btn--primary" style={{ padding: '1rem 2rem', fontSize: '1.1rem' }}>
-              📍 View Branch 2 on Google Maps
-            </a>
+            <div className="map-btn-container">
+              <a href="https://maps.app.goo.gl/hBPH14qsYuFbr5ot9" target="_blank" rel="noopener noreferrer" className="btn btn-primary" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}>
+                <MapPin size={20} /> View Branch 2 on Google Maps
+              </a>
+            </div>
           </div>
         </div>
       </section>

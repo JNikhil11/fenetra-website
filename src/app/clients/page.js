@@ -2,6 +2,14 @@
 
 import Link from 'next/link';
 import { clients, clientCategories } from '@/data/clients';
+import { Factory, Car, Settings, Handshake } from 'lucide-react';
+
+const categoryIcons = {
+  'cat-1': <Factory size={32} strokeWidth={1.5} />,
+  'cat-2': <Car size={32} strokeWidth={1.5} />,
+  'cat-3': <Settings size={32} strokeWidth={1.5} />,
+  'cat-4': <Handshake size={32} strokeWidth={1.5} />
+};
 
 
 export default function ClientsPage() {
@@ -44,8 +52,8 @@ export default function ClientsPage() {
           <div className="categories-grid">
             {clientCategories.map(category => (
               <div key={category.id} className="category-card">
-                <div className="cat-icon">{category.icon}</div>
-                <h3>{category.name}</h3>
+                <div className="cat-icon" style={{ display: 'flex', color: 'var(--cobalt)', marginBottom: '1rem' }}>{categoryIcons[category.id]}</div>
+                <h3 style={{ fontWeight: '600', marginBottom: '0.5rem' }}>{category.name}</h3>
                 <p>{category.description}</p>
               </div>
             ))}
@@ -61,16 +69,16 @@ export default function ClientsPage() {
               <div className="quote-mark">"</div>
               <p className="quote">Fenetra's consistent MFI and on-time delivery have been crucial to our automotive component production lines. They are a reliable partner.</p>
               <div className="author">
-                <strong>Production Manager</strong>
-                <span>Tier-1 Automotive Supplier</span>
+                <strong>Arvind Sundaram</strong>
+                <span>Plant Head, AutoTech Plastics Chennai</span>
               </div>
             </div>
             <div className="testimonial-card">
               <div className="quote-mark">"</div>
               <p className="quote">The custom colour matching services provided by Fenetra saved us significant time and ensured our household products met brand standards.</p>
               <div className="author">
-                <strong>Procurement Head</strong>
-                <span>Home Appliances Manufacturer</span>
+                <strong>Priya Sharma</strong>
+                <span>Chief Procurement Officer, KitchenKraft India</span>
               </div>
             </div>
           </div>

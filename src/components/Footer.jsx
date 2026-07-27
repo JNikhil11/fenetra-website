@@ -2,6 +2,7 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { MapPin, Phone, Mail } from 'lucide-react';
 
 export default function Footer() {
   return (
@@ -10,7 +11,7 @@ export default function Footer() {
         <div className="footer-col">
           <Link href="/">
             <Image 
-              src="/images/logo.jpg" 
+              src="/images/logo-transparent.png" 
               width={180} 
               height={48} 
               alt="Fenetra Industries" 
@@ -53,20 +54,20 @@ export default function Footer() {
         <div className="footer-col">
           <h4 className="footer-heading">Contact Us</h4>
           <div className="footer-contact-item">
-            <span className="footer-contact-icon">📍</span>
-            <span><strong>Head Office:</strong><br />123 Industrial Area, Phase 1,<br />Mumbai, Maharashtra 400001</span>
+            <span className="footer-contact-icon" style={{ display: 'flex', color: 'var(--amber)', marginTop: '4px' }}><MapPin size={18} /></span>
+            <span><strong>Head Office:</strong><br />No. 158, BVL Blossom, Next to Sathyam Grand Hotel,<br />Chennai-Bangalore Highway, Sriperumbudur</span>
           </div>
           <div className="footer-contact-item">
-            <span className="footer-contact-icon">📍</span>
-            <span><strong>Branch Office:</strong><br />456 GIDC Estate,<br />Ahmedabad, Gujarat 382445</span>
+            <span className="footer-contact-icon" style={{ display: 'flex', color: 'var(--amber)', marginTop: '4px' }}><MapPin size={18} /></span>
+            <span><strong>Branch Office:</strong><br />Plot No. 10, Thiru Nagar, Mannur-Aranvoyal Road,<br />Mannur Village, Sriperumbudur - 602105</span>
           </div>
           <div className="footer-contact-item">
-            <span className="footer-contact-icon">📞</span>
+            <span className="footer-contact-icon" style={{ display: 'flex', color: 'var(--amber)' }}><Phone size={18} /></span>
             <span>+91 95663 26131</span>
           </div>
           <div className="footer-contact-item">
-            <span className="footer-contact-icon">✉️</span>
-            <span>fenetraindustries@gmail.com</span>
+            <span className="footer-contact-icon" style={{ display: 'flex', color: 'var(--amber)' }}><Mail size={18} /></span>
+            <span>info@fenetra.in</span>
           </div>
         </div>
       </div>

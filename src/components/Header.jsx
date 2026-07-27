@@ -30,8 +30,8 @@ export default function Header() {
       </div>
       
       <div className="main-bar">
-        <Link href="/" onClick={closeMobileMenu}>
-          <Image src="/images/logo.jpg" width={180} height={48} style={{ objectFit: 'contain' }} alt="Fenetra Industries" priority={true} />
+        <Link href="/" onClick={closeMobileMenu} className="logo-container">
+          <Image src="/images/logo-transparent.png" width={180} height={48} className="nav-logo" alt="Fenetra Industries" priority={true} />
         </Link>
         
         <nav className="nav">
@@ -115,6 +115,8 @@ export default function Header() {
         .top-bar a { color: rgba(255,255,255,0.8); text-decoration: none; }
         .top-bar a:hover { color: white; }
         .main-bar { max-width: 1280px; margin: 0 auto; padding: 0.875rem 1.5rem; display: flex; align-items: center; justify-content: space-between; }
+        .logo-container { display: flex; align-items: center; }
+        .nav-logo { object-fit: contain; }
         .nav { display: flex; align-items: center; gap: 1.5rem; }
         .nav-link { color: var(--graphite); font-weight: 500; font-size: 0.9375rem; position: relative; padding: 0.5rem 0; transition: color 0.3s; text-decoration: none; }
         .nav-link:hover, .nav-link.active { color: var(--cobalt); }

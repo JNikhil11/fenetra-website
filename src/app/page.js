@@ -4,6 +4,9 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { products } from '@/data/products';
 import { industries } from '@/data/industries';
+import { suppliers } from '@/data/suppliers';
+import { RefreshCw, CircleDollarSign, FlaskConical, Truck } from 'lucide-react';
+import Marquee from 'react-fast-marquee';
 
 export default function Home() {
   return (
@@ -128,28 +131,31 @@ export default function Home() {
             <div className="section-overline">OUR PRODUCTS</div>
             <h2>Industrial-Grade Polymer Granules</h2>
           </div>
-          <div className="product-grid">
-            {products.slice(0, 5).map(product => (
-              <div className="card product-card" key={product.slug}>
-                <div className="card-image-wrap">
-                  <Image src={product.image} alt={product.name} width={400} height={250} className="card-image" />
-                </div>
-                <div className="card-content">
-                  <h3>{product.name}</h3>
-                  <p className="full-name">{product.fullName}</p>
-                  <div className="tags">
-                    {product.properties.slice(0, 2).map((prop, i) => (
-                      <span key={i} className="tag">{prop}</span>
-                    ))}
+          <div className="product-marquee-container">
+            <Marquee direction="right" pauseOnHover={true} speed={40} gradient={false}>
+              {/* Duplicate the array to ensure a seamless loop without gaps */}
+              {[...products.slice(0, 5), ...products.slice(0, 5)].map((product, idx) => (
+                <div className="card product-card marquee-card" key={`${product.slug}-${idx}`}>
+                  <div className="card-image-wrap">
+                    <Image src={product.image} alt={product.name} width={400} height={250} className="card-image" />
                   </div>
-                  <div className="primary-use">Use: {product.primaryUse}</div>
-                  <div className="card-actions">
-                    <Link href={`/products/${product.slug}`} className="btn btn--outline btn--small">View Spec Sheet</Link>
-                    <Link href={`/contact?product=${product.slug}`} className="btn btn--amber btn--small">Request Quote</Link>
+                  <div className="card-content">
+                    <h3>{product.name}</h3>
+                    <p className="full-name">{product.fullName}</p>
+                    <div className="tags">
+                      {product.properties.slice(0, 2).map((prop, i) => (
+                        <span key={i} className="tag">{prop}</span>
+                      ))}
+                    </div>
+                    <div className="primary-use">Use: {product.primaryUse}</div>
+                    <div className="card-actions">
+                      <Link href={`/products/${product.slug}`} className="btn btn--outline btn--small">View Spec Sheet</Link>
+                      <Link href={`/contact?product=${product.slug}`} className="btn btn--amber btn--small">Request Quote</Link>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </Marquee>
           </div>
         </div>
       </section>
@@ -163,22 +169,22 @@ export default function Home() {
           </div>
           <div className="advantage-grid">
             <div className="advantage-card">
-              <div className="icon-circle">🔄</div>
+              <div className="icon-circle" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--cobalt)' }}><RefreshCw size={32} strokeWidth={1.5} /></div>
               <h3>Batch-to-Batch Uniformity</h3>
               <p>Consistent quality control ensures your manufacturing process remains stable and uninterrupted, reducing rejection rates.</p>
             </div>
             <div className="advantage-card">
-              <div className="icon-circle">💰</div>
+              <div className="icon-circle" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--cobalt)' }}><CircleDollarSign size={32} strokeWidth={1.5} /></div>
               <h3>Competitive Wholesale Pricing</h3>
               <p>Direct sourcing from manufacturers allows us to provide the best market rates for premium polymer grades.</p>
             </div>
             <div className="advantage-card">
-              <div className="icon-circle">👨‍🔬</div>
+              <div className="icon-circle" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--cobalt)' }}><FlaskConical size={32} strokeWidth={1.5} /></div>
               <h3>Dedicated Technical Support</h3>
               <p>Our material experts help you select the exact grade and specifications needed for your specific moulding applications.</p>
             </div>
             <div className="advantage-card">
-              <div className="icon-circle">🚚</div>
+              <div className="icon-circle" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--cobalt)' }}><Truck size={32} strokeWidth={1.5} /></div>
               <h3>On-Time Delivery</h3>
               <p>With our own transport fleet and strategic warehousing, we guarantee prompt delivery to keep your production lines running.</p>
             </div>
@@ -193,16 +199,24 @@ export default function Home() {
             <div className="section-overline">TRUSTED BY INDIA'S LEADING MANUFACTURERS</div>
             <h2>Our Supply Partners</h2>
           </div>
-          <div className="trust-strip">
-            <div className="trust-strip__text">
-              <span className="partner-name">Reliance</span>
-              <span className="partner-badge">Authorized Distributor</span>
-            </div>
-            <div className="trust-strip__text">Indian Oil Corporation</div>
-            <div className="trust-strip__text">Kingfa</div>
-            <div className="trust-strip__text">Loxim</div>
-            <div className="trust-strip__text">LG</div>
-          </div>
+          <Marquee direction="left" pauseOnHover={true} speed={50} gradient={false} className="supplier-marquee">
+            {[...suppliers, ...suppliers].map((sup, idx) => (
+              <div key={`${sup.name}-${idx}`} className="supplier-marquee-card">
+                {sup.domain && (
+                  <img 
+                    src={`https://logo.clearbit.com/${sup.domain}`} 
+                    alt={`${sup.shortName} Logo`} 
+                    className="supplier-logo" 
+                    onError={(e) => { e.target.style.display = 'none'; }}
+                  />
+                )}
+                <div className="supplier-name">
+                  {sup.name}
+                  {sup.badge && <span className="supplier-badge">{sup.badge}</span>}
+                </div>
+              </div>
+            ))}
+          </Marquee>
         </div>
       </section>
 
@@ -280,19 +294,19 @@ export default function Home() {
               <div className="blog-date">Oct 15, 2026</div>
               <h3>Understanding Melt Flow Index and Why It Matters</h3>
               <p>Learn how MFI affects processability and the final mechanical properties of your moulded products.</p>
-              <Link href="#" className="link-arrow">Read More &rarr;</Link>
+              <Link href="/blog" className="link-arrow">Read More &rarr;</Link>
             </div>
             <div className="blog-card">
               <div className="blog-date">Sep 28, 2026</div>
               <h3>Virgin vs. Reprocessed PPCP: How to Choose</h3>
               <p>A comprehensive guide to selecting the right polymer grade based on application requirements and cost constraints.</p>
-              <Link href="#" className="link-arrow">Read More &rarr;</Link>
+              <Link href="/blog" className="link-arrow">Read More &rarr;</Link>
             </div>
             <div className="blog-card">
               <div className="blog-date">Sep 10, 2026</div>
               <h3>The Circular Economy in Indian Plastics Manufacturing</h3>
               <p>Exploring the growing role of high-quality reprocessed materials in sustainable manufacturing practices.</p>
-              <Link href="#" className="link-arrow">Read More &rarr;</Link>
+              <Link href="/blog" className="link-arrow">Read More &rarr;</Link>
             </div>
           </div>
         </div>
@@ -713,6 +727,58 @@ export default function Home() {
         .cta-subtitle { font-size: 1.25rem; color: rgba(255,255,255,0.9); margin-bottom: 3rem; }
         .cta-actions { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
 
+        /* Marquee Specific Styles */
+        .product-marquee-container {
+          margin: 0 -1.5rem; /* Allow marquee to touch edges on mobile */
+          padding: 1rem 0;
+        }
+        .marquee-card {
+          margin: 0 1rem;
+          width: 350px; /* Fixed width for marquee cards */
+        }
+        .supplier-marquee {
+          margin-top: 2rem;
+        }
+        .supplier-marquee-card {
+          display: flex;
+          align-items: center;
+          gap: 1.5rem;
+          background: white;
+          padding: 1.5rem 2rem;
+          border-radius: 12px;
+          margin: 0 1rem;
+          box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+          border: 1px solid rgba(0,0,0,0.05);
+          transition: transform 0.3s;
+        }
+        .supplier-marquee-card:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+        }
+        .supplier-logo {
+          height: 40px;
+          width: auto;
+          object-fit: contain;
+          border-radius: 4px;
+        }
+        .supplier-name {
+          font-weight: 700;
+          color: var(--navy);
+          font-size: 1.25rem;
+          display: flex;
+          flex-direction: column;
+          gap: 0.25rem;
+        }
+        .supplier-badge {
+          font-size: 0.75rem;
+          background: rgba(201, 146, 46, 0.15);
+          color: var(--amber);
+          padding: 0.25rem 0.5rem;
+          border-radius: 4px;
+          display: inline-block;
+          width: fit-content;
+        }
+
         /* Responsive */
         @media (max-width: 1024px) {
           .stats-grid, .advantage-grid { grid-template-columns: repeat(2, 1fr); }
@@ -734,9 +800,7 @@ export default function Home() {
           .card-actions { grid-template-columns: 1fr; }
           
           .cta-actions { flex-direction: column; width: 100%; max-width: 300px; margin: 0 auto; }
-          .cta-actions 
         }
-        
         @media (max-width: 480px) {
           .stats-grid { grid-template-columns: 1fr; }
           .trust-strip { gap: 2rem; }

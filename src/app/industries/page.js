@@ -2,6 +2,13 @@
 
 import Link from 'next/link';
 import { industries } from '@/data/industries';
+import { Car, Package, Armchair } from 'lucide-react';
+
+const industryIcons = {
+  automotive: <Car size={40} strokeWidth={1.5} className="mr-3 text-cobalt" style={{ display: 'inline-block', verticalAlign: 'middle', marginRight: '1rem', color: 'var(--cobalt)' }} />,
+  packaging: <Package size={40} strokeWidth={1.5} className="mr-3 text-cobalt" style={{ display: 'inline-block', verticalAlign: 'middle', marginRight: '1rem', color: 'var(--cobalt)' }} />,
+  'consumer-goods': <Armchair size={40} strokeWidth={1.5} className="mr-3 text-cobalt" style={{ display: 'inline-block', verticalAlign: 'middle', marginRight: '1rem', color: 'var(--cobalt)' }} />
+};
 
 
 export default function IndustriesPage() {
@@ -23,7 +30,10 @@ export default function IndustriesPage() {
             <div className="industry-layout">
               <div className="industry-text">
                 <span className="overline">{industry.name.toUpperCase()}</span>
-                <h2>{industry.icon} {industry.name}</h2>
+                <h2 style={{ display: 'flex', alignItems: 'center', fontWeight: '600' }}>
+                  {industryIcons[industry.slug]} 
+                  <span>{industry.name}</span>
+                </h2>
                 <p className="lead">{industry.longDescription || industry.description}</p>
 
                 <div className="industry-details">

@@ -1,6 +1,8 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { products } from '@/data/products';
+import { Check } from 'lucide-react';
+import Marquee from 'react-fast-marquee';
 
 export const metadata = {
   title: 'Products | Fenetra Industries',
@@ -19,58 +21,60 @@ export default function ProductsPage() {
 
       <section className="products-grid-section">
         <div className="container">
-          <div className="grid">
-            {products.map(product => (
-              <div key={product.id} className="product-card">
-                <div className="card-image">
-                  <div className={`type-badge ${product.type.toLowerCase()}`}>
-                    {product.type}
+          <div className="product-marquee-container">
+            <Marquee direction="right" pauseOnHover={true} speed={40} gradient={false}>
+              {[...products, ...products].map((product, idx) => (
+                <div key={`${product.slug}-${idx}`} className="product-card marquee-card">
+                  <div className="card-image">
+                    <div className={`type-badge ${product.type.toLowerCase()}`}>
+                      {product.type}
+                    </div>
+                    <Image 
+                      src={product.image} 
+                      alt={product.name} 
+                      width={400} 
+                      height={300} 
+                    />
                   </div>
-                  <Image 
-                    src={product.image} 
-                    alt={product.name} 
-                    width={400} 
-                    height={300} 
-                  />
+                  <div className="card-content">
+                    <h3>{product.name}</h3>
+                    <div className="full-name">{product.fullName}</div>
+                    
+                    <div className="tags">
+                      {product.properties.slice(0, 3).map(prop => (
+                        <span key={prop} className="tag">{prop}</span>
+                      ))}
+                    </div>
+
+                    <div className="spec-plate-mini">
+                      <div className="spec">
+                        <span className="label">MFI</span>
+                        <span className="value">{product.mfi}</span>
+                      </div>
+                      <div className="spec">
+                        <span className="label">Density</span>
+                        <span className="value">{product.density}</span>
+                      </div>
+                      <div className="spec">
+                        <span className="label">HDT</span>
+                        <span className="value">{product.hdt}</span>
+                      </div>
+                    </div>
+
+                    <div className="primary-use">
+                      <span className="label">PRIMARY USE:</span>
+                      <span className="value">{product.applications[0]}</span>
+                    </div>
+
+                    <div className="actions">
+                      <Link href={`/products/${product.slug}`} className="btn-link">View Details</Link>
+                      <a href="/Fenetra-Industries-Brochure.pdf" target="_blank" rel="noopener noreferrer" className="btn-link secondary">Download Datasheet</a>
+                      <Link href={`/contact?product=${product.slug}`} className="btn-link accent">Request Quote</Link>
+                    </div>
+                  </div>
                 </div>
-                <div className="card-content">
-                  <h3>{product.name}</h3>
-                  <div className="full-name">{product.fullName}</div>
-                  
-                  <div className="tags">
-                    {product.properties.slice(0, 3).map(prop => (
-                      <span key={prop} className="tag">{prop}</span>
-                    ))}
-                  </div>
-
-                  <div className="spec-plate-mini">
-                    <div className="spec">
-                      <span className="label">MFI</span>
-                      <span className="value">{product.mfi}</span>
-                    </div>
-                    <div className="spec">
-                      <span className="label">Density</span>
-                      <span className="value">{product.density}</span>
-                    </div>
-                    <div className="spec">
-                      <span className="label">HDT</span>
-                      <span className="value">{product.hdt}</span>
-                    </div>
-                  </div>
-
-                  <div className="primary-use">
-                    <span className="label">PRIMARY USE:</span>
-                    <span className="value">{product.applications[0]}</span>
-                  </div>
-
-                  <div className="actions">
-                    <Link href={`/products/${product.slug}`} className="btn-link">View Details</Link>
-                    <a href="#" className="btn-link secondary">Download Datasheet</a>
-                    <Link href={`/contact?product=${product.slug}`} className="btn-link accent">Request Quote</Link>
-                  </div>
-                </div>
-              </div>
-            ))}
+              ))}
+            </Marquee>
           </div>
         </div>
       </section>
@@ -81,19 +85,19 @@ export default function ProductsPage() {
             <h2>Our Quality Commitment</h2>
             <div className="commitments">
               <div className="item">
-                <span className="check">✓</span>
+                <span className="check" style={{ display: 'inline-flex', alignItems: 'center', color: 'var(--cobalt)' }}><Check size={20} strokeWidth={2.5} /></span>
                 <span>Consistent Melt Flow Index (MFI)</span>
               </div>
               <div className="item">
-                <span className="check">✓</span>
+                <span className="check" style={{ display: 'inline-flex', alignItems: 'center', color: 'var(--cobalt)' }}><Check size={20} strokeWidth={2.5} /></span>
                 <span>High Purity & Cleanliness</span>
               </div>
               <div className="item">
-                <span className="check">✓</span>
+                <span className="check" style={{ display: 'inline-flex', alignItems: 'center', color: 'var(--cobalt)' }}><Check size={20} strokeWidth={2.5} /></span>
                 <span>Custom Colour Matching Available</span>
               </div>
               <div className="item">
-                <span className="check">✓</span>
+                <span className="check" style={{ display: 'inline-flex', alignItems: 'center', color: 'var(--cobalt)' }}><Check size={20} strokeWidth={2.5} /></span>
                 <span>Rigorous Batch Testing</span>
               </div>
             </div>
@@ -139,10 +143,13 @@ export default function ProductsPage() {
           padding: 80px 0;
           background-color: #f9fafb;
         }
-        .grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-          gap: 32px;
+        .product-marquee-container {
+          margin: 0 -1.5rem;
+          padding: 1rem 0;
+        }
+        .marquee-card {
+          margin: 0 16px;
+          width: 350px;
         }
         .product-card {
           background: white;

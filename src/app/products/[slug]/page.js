@@ -2,6 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { products } from '@/data/products';
+import { Check } from 'lucide-react';
 
 export function generateStaticParams() {
   return products.map(p => ({ slug: p.slug }));
@@ -50,7 +51,7 @@ export default async function ProductDetailPage({ params }) {
 
               <div className="hero-actions">
                 <Link href={`/contact?product=${product.slug}`} className="btn btn-primary">Request Quote</Link>
-                <a href="#" className="btn btn-outline">Download Datasheet</a>
+                <a href="/Fenetra-Industries-Brochure.pdf" target="_blank" rel="noopener noreferrer" className="btn btn-outline">Download Datasheet</a>
               </div>
             </div>
             
@@ -134,8 +135,8 @@ export default async function ProductDetailPage({ params }) {
               <ul className="app-list">
                 {product.applications.map((app, idx) => (
                   <li key={idx}>
-                    <span className="check">✓</span>
-                    {app}
+                    <span className="check" style={{ display: 'inline-flex', alignItems: 'center', color: 'var(--cobalt)', marginRight: '8px' }}><Check size={18} strokeWidth={2.5} /></span>
+                    <span>{app}</span>
                   </li>
                 ))}
               </ul>
