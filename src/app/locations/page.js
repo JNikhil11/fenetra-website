@@ -80,7 +80,7 @@ export default function LocationsPage() {
         </div>
       </section>
 
-      <style jsx>{`
+      <style>{`
         .page-hero {
           background-color: var(--navy);
           color: white;

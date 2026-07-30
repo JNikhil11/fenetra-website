@@ -113,7 +113,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <style jsx>{`
+      <style>{`
         .page-hero {
           background-color: var(--navy);
           color: white;

@@ -104,7 +104,7 @@ export default function IndustriesPage() {
         </div>
       </section>
 
-      <style jsx>{`
+      <style>{`
         .page-hero {
           background: var(--navy);
           color: white;
