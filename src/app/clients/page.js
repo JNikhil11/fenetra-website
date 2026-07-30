@@ -1,8 +1,11 @@
-'use client';
-
 import Link from 'next/link';
 import { clients, clientCategories } from '@/data/clients';
-import { Factory, Car, Settings, Handshake } from 'lucide-react';
+import { Factory, Car, Settings, Handshake, Quote } from 'lucide-react';
+
+export const metadata = {
+  title: 'Our Clients | Fenetra Industries',
+  description: 'Discover the industries and trusted partners that rely on Fenetra Industries for their polymer manufacturing needs.',
+};
 
 const categoryIcons = {
   'cat-1': <Factory size={32} strokeWidth={1.5} />,
@@ -66,15 +69,15 @@ export default function ClientsPage() {
           <h2 className="section-title">What Our Clients Say</h2>
           <div className="testimonials-grid">
             <div className="testimonial-card">
-              <div className="quote-mark">"</div>
-              <p className="quote">Fenetra's consistent MFI and on-time delivery have been crucial to our automotive component production lines. They are a reliable partner.</p>
+              <div className="quote-mark">&quot;</div>
+              <p className="quote">Fenetra&apos;s consistent MFI and on-time delivery have been crucial to our automotive component production lines. They are a reliable partner.</p>
               <div className="author">
                 <strong>Arvind Sundaram</strong>
                 <span>Plant Head, AutoTech Plastics Chennai</span>
               </div>
             </div>
             <div className="testimonial-card">
-              <div className="quote-mark">"</div>
+              <div className="quote-mark">&quot;</div>
               <p className="quote">The custom colour matching services provided by Fenetra saved us significant time and ensured our household products met brand standards.</p>
               <div className="author">
                 <strong>Priya Sharma</strong>

@@ -1,8 +1,11 @@
-'use client';
-
 import Link from 'next/link';
 import { industries } from '@/data/industries';
 import { Car, Package, Armchair } from 'lucide-react';
+
+export const metadata = {
+  title: 'Industries We Serve | Fenetra Industries',
+  description: 'Fenetra Industries supplies premium polymer granules to automotive, packaging, consumer goods, and other key manufacturing sectors.',
+};
 
 const industryIcons = {
   automotive: <Car size={40} strokeWidth={1.5} className="mr-3 text-cobalt" style={{ display: 'inline-block', verticalAlign: 'middle', marginRight: '1rem', color: 'var(--cobalt)' }} />,

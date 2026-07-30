@@ -1,6 +1,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { blogPosts } from '@/data/blog-posts';
+import { marked } from 'marked';
+import DOMPurify from 'isomorphic-dompurify';
 
 export function generateStaticParams() {
   return blogPosts.map(p => ({ slug: p.slug }));
@@ -15,49 +17,7 @@ export async function generateMetadata({ params }) {
   };
 }
 
-function renderMarkdown(md) {
-  if (!md) return '';
-  let html = md;
-  // Headers
-  html = html.replace(/^### (.*$)/gim, '<h3>$1</h3>');
-  html = html.replace(/^## (.*$)/gim, '<h2>$1</h2>');
-  html = html.replace(/^# (.*$)/gim, '<h1>$1</h1>');
-  // Bold
-  html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-  // Links
-  html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>');
-  
-  // Lists
-  html = html.replace(/^\s*-\s+(.*)$/gim, '<ul><li>$1</li></ul>');
-  html = html.replace(/<\/ul>\n<ul>/gim, '');
-  
-  // Tables
-  html = html.replace(/^\|(.+)\|$/gim, (match) => {
-    let row = match.trim();
-    if (row.includes('---')) return ''; // Skip separator row
-    let cells = row.split('|').filter(c => c).map(c => c.trim());
-    return '<tr>' + cells.map(c => '<td>' + c + '</td>').join('') + '</tr>';
-  });
-  html = html.replace(/(<tr>.*?<\/tr>)+/gs, (match) => {
-    let rows = match.split('</tr>').filter(r => r).map(r => r + '</tr>');
-    let thead = rows[0].replace(/<td>/g, '<th>').replace(/<\/td>/g, '</th>');
-    let tbody = rows.slice(1).join('');
-    return '<table><thead>' + thead + '</thead><tbody>' + tbody + '</tbody></table>';
-  });
 
-  // Paragraphs
-  html = html.replace(/\n\n/g, '</p><p>');
-  html = '<p>' + html + '</p>';
-  
-  // Cleanup empty p
-  html = html.replace(/<p>\s*<\/p>/g, '');
-  // Cleanup p around blocks
-  html = html.replace(/<p>(<h[1-6]>.*?<\/h[1-6]>)<\/p>/g, '$1');
-  html = html.replace(/<p>(<ul>.*?<\/ul>)<\/p>/gs, '$1');
-  html = html.replace(/<p>(<table>.*?<\/table>)<\/p>/gs, '$1');
-  
-  return html;
-}
 
 export default async function BlogPost({ params }) {
   const { slug } = await params;
@@ -93,17 +53,10 @@ export default async function BlogPost({ params }) {
       <section className="article-container">
         <article 
           className="content"
-          dangerouslySetInnerHTML={{ __html: renderMarkdown(post.content) }}
+          dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(marked.parse(post.content)) }}
         />
         
-        <div className="share-section">
-          <h3>Share this article</h3>
-          <div className="share-buttons">
-            <button className="share-btn">LinkedIn</button>
-            <button className="share-btn">Twitter</button>
-            <button className="share-btn">Facebook</button>
-          </div>
-        </div>
+
       </section>
 
       <section className="related-posts">

@@ -1,12 +1,14 @@
-'use client';
-
 import Link from 'next/link';
 import Image from 'next/image';
-import { products } from '@/data/products';
 import { industries } from '@/data/industries';
-import { suppliers } from '@/data/suppliers';
+import { blogPosts } from '@/data/blog-posts';
 import { RefreshCw, CircleDollarSign, FlaskConical, Truck } from 'lucide-react';
-import Marquee from 'react-fast-marquee';
+import { FeaturedProductsMarquee, SupplyPartnersMarquee } from '@/components/HomeMarquees';
+
+export const metadata = {
+  title: 'Home | Fenetra Industries',
+  description: 'Premium Raw Material Supplier - Plastic & Polymer Granules. Quality Polymers. Sustainable Solutions. Trusted Partnerships.',
+};
 
 export default function Home() {
   return (
@@ -19,6 +21,7 @@ export default function Home() {
           loop 
           muted 
           playsInline
+          poster="/images/hero-poster.jpg"
         >
           <source src="/videos/hero-bg.mp4" type="video/mp4" />
         </video>
@@ -106,7 +109,7 @@ export default function Home() {
               <div className="vision-mission">
                 <div className="vm-block">
                   <h3>Our Vision</h3>
-                  <p>To be India's most reliable and customer-centric polymer distribution network.</p>
+                  <p>To be India&apos;s most reliable and customer-centric polymer distribution network.</p>
                 </div>
                 <div className="vm-block">
                   <h3>Our Mission</h3>
@@ -132,30 +135,7 @@ export default function Home() {
             <h2>Industrial-Grade Polymer Granules</h2>
           </div>
           <div className="product-marquee-container">
-            <Marquee direction="right" pauseOnHover={true} speed={40} gradient={false}>
-              {/* Duplicate the array to ensure a seamless loop without gaps */}
-              {[...products.slice(0, 5), ...products.slice(0, 5)].map((product, idx) => (
-                <div className="card product-card marquee-card" key={`${product.slug}-${idx}`}>
-                  <div className="card-image-wrap">
-                    <Image src={product.image} alt={product.name} width={400} height={250} className="card-image" />
-                  </div>
-                  <div className="card-content">
-                    <h3>{product.name}</h3>
-                    <p className="full-name">{product.fullName}</p>
-                    <div className="tags">
-                      {product.properties.slice(0, 2).map((prop, i) => (
-                        <span key={i} className="tag">{prop}</span>
-                      ))}
-                    </div>
-                    <div className="primary-use">Use: {product.primaryUse}</div>
-                    <div className="card-actions">
-                      <Link href={`/products/${product.slug}`} className="btn btn--outline btn--small">View Spec Sheet</Link>
-                      <Link href={`/contact?product=${product.slug}`} className="btn btn--amber btn--small">Request Quote</Link>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </Marquee>
+            <FeaturedProductsMarquee />
           </div>
         </div>
       </section>
@@ -196,27 +176,10 @@ export default function Home() {
       <section className="supplier-strip section--white">
         <div className="container">
           <div className="trust-header text-center">
-            <div className="section-overline">TRUSTED BY INDIA'S LEADING MANUFACTURERS</div>
+            <div className="section-overline">TRUSTED BY INDIA&apos;S LEADING MANUFACTURERS</div>
             <h2>Our Supply Partners</h2>
           </div>
-          <Marquee direction="left" pauseOnHover={true} speed={50} gradient={false} className="supplier-marquee">
-            {[...suppliers, ...suppliers].map((sup, idx) => (
-              <div key={`${sup.name}-${idx}`} className="supplier-marquee-card">
-                {sup.domain && (
-                  <img 
-                    src={`https://logo.clearbit.com/${sup.domain}`} 
-                    alt={`${sup.shortName} Logo`} 
-                    className="supplier-logo" 
-                    onError={(e) => { e.target.style.display = 'none'; }}
-                  />
-                )}
-                <div className="supplier-name">
-                  {sup.name}
-                  {sup.badge && <span className="supplier-badge">{sup.badge}</span>}
-                </div>
-              </div>
-            ))}
-          </Marquee>
+          <SupplyPartnersMarquee />
         </div>
       </section>
 
@@ -237,7 +200,7 @@ export default function Home() {
         <div className="container">
           <div className="section-header text-center">
             <div className="section-overline">INDUSTRIES WE SERVE</div>
-            <h2>Powering India's Manufacturing</h2>
+            <h2>Powering India&apos;s Manufacturing</h2>
           </div>
           <div className="industry-grid">
             {industries.map(ind => (
@@ -265,7 +228,7 @@ export default function Home() {
             <div className="col-text">
               <div className="iso-badge">ISO 9001:2015 CERTIFIED</div>
               <h2>Uncompromising Quality Standards</h2>
-              <p>We understand that raw material consistency is critical to your product's success. Our rigorous quality assurance protocol guarantees:</p>
+              <p>We understand that raw material consistency is critical to your product&apos;s success. Our rigorous quality assurance protocol guarantees:</p>
               <ul className="quality-list">
                 <li>Strict MFI consistency across all batches</li>
                 <li>Zero contamination guarantee for virgin grades</li>
@@ -290,24 +253,14 @@ export default function Home() {
             <h2>Latest Insights</h2>
           </div>
           <div className="blog-grid">
-            <div className="blog-card">
-              <div className="blog-date">Oct 15, 2026</div>
-              <h3>Understanding Melt Flow Index and Why It Matters</h3>
-              <p>Learn how MFI affects processability and the final mechanical properties of your moulded products.</p>
-              <Link href="/blog" className="link-arrow">Read More &rarr;</Link>
-            </div>
-            <div className="blog-card">
-              <div className="blog-date">Sep 28, 2026</div>
-              <h3>Virgin vs. Reprocessed PPCP: How to Choose</h3>
-              <p>A comprehensive guide to selecting the right polymer grade based on application requirements and cost constraints.</p>
-              <Link href="/blog" className="link-arrow">Read More &rarr;</Link>
-            </div>
-            <div className="blog-card">
-              <div className="blog-date">Sep 10, 2026</div>
-              <h3>The Circular Economy in Indian Plastics Manufacturing</h3>
-              <p>Exploring the growing role of high-quality reprocessed materials in sustainable manufacturing practices.</p>
-              <Link href="/blog" className="link-arrow">Read More &rarr;</Link>
-            </div>
+            {blogPosts.slice(0, 3).map(post => (
+              <div className="blog-card" key={post.slug}>
+                <div className="blog-date">{post.date}</div>
+                <h3>{post.title}</h3>
+                <p>{post.excerpt}</p>
+                <Link href={`/blog/${post.slug}`} className="link-arrow">Read More &rarr;</Link>
+              </div>
+            ))}
           </div>
         </div>
       </section>

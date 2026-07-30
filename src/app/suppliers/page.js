@@ -20,7 +20,7 @@ export default function SuppliersPage() {
             <div className="badge">Authorized Distributor</div>
             <h2>Reliance Industries Limited</h2>
             <p className="featured-desc">
-              We are proud to be an authorized distributor for Reliance Industries, India's largest private sector enterprise and the most trusted name in polymer manufacturing. Our partnership ensures our clients receive premium quality polymers with consistent specifications.
+              We are proud to be an authorized distributor for Reliance Industries, India&apos;s largest private sector enterprise and the most trusted name in polymer manufacturing. Our partnership ensures our clients receive premium quality polymers with consistent specifications.
             </p>
             <div className="featured-products">
               <h3>Key Products Supplied:</h3>

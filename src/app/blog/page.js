@@ -1,8 +1,8 @@
 'use client';
-
 import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { Calendar, User } from 'lucide-react';
 import { blogPosts, blogCategories } from '@/data/blog-posts';
 
 export default function BlogPage() {

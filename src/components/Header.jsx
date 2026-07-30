@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
+import { COMPANY_INFO } from '@/data/company';
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
@@ -24,8 +25,8 @@ export default function Header() {
     <header className={`header ${scrolled ? 'scrolled' : ''}`}>
       <div className="top-bar">
         <div className="container">
-          <a href="tel:+919566326131">+91 95663 26131</a>
-          <a href="mailto:fenetraindustries@gmail.com">fenetraindustries@gmail.com</a>
+          <a href={`tel:${COMPANY_INFO.phone.primary.replace(/\s+/g, '')}`}>{COMPANY_INFO.phone.primary}</a>
+          <a href={`mailto:${COMPANY_INFO.emails.primary}`}>{COMPANY_INFO.emails.primary}</a>
         </div>
       </div>
       

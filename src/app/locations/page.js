@@ -1,7 +1,11 @@
-'use client';
-import { MapPin } from 'lucide-react';
+import React from 'react';
+import { MapPin, Phone, Mail, Clock } from 'lucide-react';
+import { COMPANY_INFO } from '@/data/company';
 
-
+export const metadata = {
+  title: 'Locations | Fenetra Industries',
+  description: 'Visit our headquarters and branch offices. Find contact details and directions to Fenetra Industries.',
+};
 export default function LocationsPage() {
   return (
     <>
@@ -19,9 +23,9 @@ export default function LocationsPage() {
               <span className="badge">Headquarters</span>
               <h2>Branch 1 (HQ)</h2>
               <div className="contact-details">
-                <p><strong>Address:</strong><br />No. 158, BVL Blossom, Next to Sathyam Grand Hotel,<br />Chennai–Bangalore Highway, Sriperumbudur</p>
-                <p><strong>Phone:</strong> +91 9566326131</p>
-                <p><strong>Email:</strong> info@fenetra.in</p>
+                <p><strong>Address:</strong><br />{COMPANY_INFO.addresses.headquarters.split(', ').map((line, i, arr) => <React.Fragment key={i}>{line}{i < arr.length - 1 && ', '}{(i === 2) && <br/>}</React.Fragment>)}</p>
+                <p><strong>Phone:</strong> {COMPANY_INFO.phone.primary}</p>
+                <p><strong>Email:</strong> {COMPANY_INFO.emails.primary}</p>
               </div>
             </div>
             <div className="branch-map" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'var(--coolgrey)', borderRadius: '12px', minHeight: '300px' }}>
@@ -41,9 +45,9 @@ export default function LocationsPage() {
               <span className="badge">Warehouse & Distribution</span>
               <h2>Branch 2</h2>
               <div className="contact-details">
-                <p><strong>Address:</strong><br />Plot No. 10, Thiru Nagar, Mannur–Aranvoyal Road,<br />Mannur Village, Sriperumbudur – 602105</p>
-                <p><strong>Phone:</strong> +91 9566326131</p>
-                <p><strong>Email:</strong> sales@fenetra.in</p>
+                <p><strong>Address:</strong><br />{COMPANY_INFO.addresses.branch.split(', ').map((line, i, arr) => <React.Fragment key={i}>{line}{i < arr.length - 1 && ', '}{(i === 2) && <br/>}</React.Fragment>)}</p>
+                <p><strong>Phone:</strong> {COMPANY_INFO.phone.primary}</p>
+                <p><strong>Email:</strong> {COMPANY_INFO.emails.sales}</p>
               </div>
             </div>
           </div>

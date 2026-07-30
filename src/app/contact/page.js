@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { Phone, Mail, Clock, MapPin } from 'lucide-react';
+import { COMPANY_INFO } from '@/data/company';
 
 export default function ContactPage() {
   const [quoteForm, setQuoteForm] = useState({
@@ -14,20 +15,50 @@ export default function ContactPage() {
   const [quoteStatus, setQuoteStatus] = useState(null);
   const [generalStatus, setGeneralStatus] = useState(null);
 
+  const [isQuoteSubmitting, setIsQuoteSubmitting] = useState(false);
+  const [isGeneralSubmitting, setIsGeneralSubmitting] = useState(false);
+
+  const handleFormspreeSubmit = async (data, setStatus, setSubmitting, resetForm) => {
+    setSubmitting(true);
+    setStatus(null);
+    const formspreeId = process.env.NEXT_PUBLIC_FORMSPREE_ID || 'placeholder';
+    try {
+      const response = await fetch(`https://formspree.io/f/${formspreeId}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+      if (response.ok) {
+        setStatus('success');
+        resetForm();
+      } else {
+        setStatus('error');
+      }
+    } catch (error) {
+      setStatus('error');
+    }
+    setSubmitting(false);
+    setTimeout(() => setStatus(null), 5000);
+  };
+
   const handleQuoteSubmit = (e) => {
     e.preventDefault();
-    console.log('Quote Request:', quoteForm);
-    setQuoteStatus('success');
-    setQuoteForm({name: '', company: '', email: '', phone: '', product: '', quantity: '', message: ''});
-    setTimeout(() => setQuoteStatus(null), 5000);
+    handleFormspreeSubmit(
+      { formType: 'Quote Request', ...quoteForm },
+      setQuoteStatus,
+      setIsQuoteSubmitting,
+      () => setQuoteForm({name: '', company: '', email: '', phone: '', product: '', quantity: '', message: ''})
+    );
   };
 
   const handleGeneralSubmit = (e) => {
     e.preventDefault();
-    console.log('General Enquiry:', generalForm);
-    setGeneralStatus('success');
-    setGeneralForm({name: '', email: '', phone: '', message: ''});
-    setTimeout(() => setGeneralStatus(null), 5000);
+    handleFormspreeSubmit(
+      { formType: 'General Enquiry', ...generalForm },
+      setGeneralStatus,
+      setIsGeneralSubmitting,
+      () => setGeneralForm({name: '', email: '', phone: '', message: ''})
+    );
   };
 
   return (
@@ -50,6 +81,9 @@ export default function ContactPage() {
               
               {quoteStatus === 'success' && (
                 <div className="toast success">Your quote request has been sent successfully!</div>
+              )}
+              {quoteStatus === 'error' && (
+                <div className="toast error" style={{background: '#ffebee', color: '#c62828', padding: '1rem', borderRadius: '8px', marginBottom: '1.5rem'}}>There was an error sending your request. Please try again or email us directly.</div>
               )}
 
               <form onSubmit={handleQuoteSubmit} className="contact-form">
@@ -100,7 +134,9 @@ export default function ContactPage() {
                   <textarea rows="4" value={quoteForm.message} onChange={(e) => setQuoteForm({...quoteForm, message: e.target.value})}></textarea>
                 </div>
 
-                <button type="submit" className="btn btn-primary btn-block">Submit Request</button>
+                <button type="submit" className="btn btn-primary btn-block" disabled={isQuoteSubmitting}>
+                  {isQuoteSubmitting ? 'Submitting...' : 'Submit Request'}
+                </button>
               </form>
             </div>
 
@@ -112,14 +148,14 @@ export default function ContactPage() {
                   <span className="icon" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--cobalt)' }}><Phone size={24} strokeWidth={1.5} /></span>
                   <div>
                     <strong>Phone</strong>
-                    <a href="tel:+919566326131">+91 9566326131</a>
+                    <a href={`tel:${COMPANY_INFO.phone.primary.replace(/\s+/g, '')}`}>{COMPANY_INFO.phone.primary}</a>
                   </div>
                 </div>
                 <div className="info-item">
                   <span className="icon" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--cobalt)' }}><Mail size={24} strokeWidth={1.5} /></span>
                   <div>
                     <strong>Email</strong>
-                    <a href="mailto:info@fenetra.in">info@fenetra.in</a>
+                    <a href={`mailto:${COMPANY_INFO.emails.primary}`}>{COMPANY_INFO.emails.primary}</a>
                   </div>
                 </div>
                 <div className="info-item">
@@ -135,11 +171,11 @@ export default function ContactPage() {
                 <h3>Our Branches</h3>
                 <div className="address-item">
                   <strong>Branch 1 (HQ)</strong>
-                  <p>No. 158, BVL Blossom, Next to Sathyam Grand Hotel, Chennai–Bangalore Highway, Sriperumbudur</p>
+                  <p>{COMPANY_INFO.addresses.headquarters}</p>
                 </div>
                 <div className="address-item">
                   <strong>Branch 2</strong>
-                  <p>Plot No. 10, Thiru Nagar, Mannur–Aranvoyal Road, Mannur Village, Sriperumbudur – 602105</p>
+                  <p>{COMPANY_INFO.addresses.branch}</p>
                 </div>
                 <Link href="/locations" className="text-link">View Maps &rarr;</Link>
               </div>
@@ -147,7 +183,7 @@ export default function ContactPage() {
               <div className="brochure-card">
                 <h3>Corporate Brochure</h3>
                 <p>Download our complete product catalog and company profile.</p>
-                <button className="btn btn-outline btn-block">Download PDF</button>
+                <a href="/Fenetra-Industries-Brochure.pdf" download className="btn btn-outline btn-block" style={{ display: 'inline-block', textAlign: 'center' }}>Download PDF</a>
               </div>
             </div>
 
@@ -163,6 +199,9 @@ export default function ContactPage() {
             
             {generalStatus === 'success' && (
               <div className="toast success">Message sent successfully!</div>
+            )}
+            {generalStatus === 'error' && (
+              <div className="toast error" style={{background: '#ffebee', color: '#c62828', padding: '1rem', borderRadius: '8px', marginBottom: '1.5rem'}}>There was an error sending your message. Please try again or email us directly.</div>
             )}
 
             <form onSubmit={handleGeneralSubmit} className="contact-form">
@@ -184,7 +223,9 @@ export default function ContactPage() {
                 <label>Message</label>
                 <textarea rows="4" required value={generalForm.message} onChange={(e) => setGeneralForm({...generalForm, message: e.target.value})}></textarea>
               </div>
-              <button type="submit" className="btn btn-primary">Send Message</button>
+              <button type="submit" className="btn btn-primary" disabled={isGeneralSubmitting}>
+                {isGeneralSubmitting ? 'Sending...' : 'Send Message'}
+              </button>
             </form>
           </div>
         </div>

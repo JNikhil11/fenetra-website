@@ -1,9 +1,11 @@
-'use client';
-
 import Link from 'next/link';
 import Image from 'next/image';
+import { Target, Shield, Users, Trophy } from 'lucide-react';
 
-
+export const metadata = {
+  title: 'About Us | Fenetra Industries',
+  description: 'Learn about Fenetra Industries, our mission, vision, and commitment to providing premium virgin and reprocessed polymer materials.',
+};
 export default function AboutPage() {
   return (
     <>
@@ -47,7 +49,7 @@ export default function AboutPage() {
         <div className="container">
           <div className="pull-quote">
             <blockquote>
-              "To become a trusted and sustainable leader in the polymer industry by delivering high-quality recycled PPCP materials and reliable polymer solutions, creating value for customers while contributing to a greener future."
+              &quot;To become a trusted and sustainable leader in the polymer industry by delivering high-quality recycled PPCP materials and reliable polymer solutions, creating value for customers while contributing to a greener future.&quot;
             </blockquote>
           </div>
         </div>
@@ -88,7 +90,7 @@ export default function AboutPage() {
             <h3>Premium Virgin Polymers</h3>
             <p>
               As an authorized distributor for Reliance Industries, we provide direct access to premium grade virgin polymers. 
-              Our customers benefit from consistent quality, competitive pricing, and reliable supply chains backed by India's largest manufacturer.
+              Our customers benefit from consistent quality, competitive pricing, and reliable supply chains backed by India&apos;s largest manufacturer.
             </p>
           </div>
         </div>
